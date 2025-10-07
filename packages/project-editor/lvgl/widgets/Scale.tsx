@@ -22,6 +22,7 @@ export class LVGLScaleWidget extends LVGLWidget {
     totalTickCount: number;
     majorTickEvery: number;
     showLabels: boolean;
+    angleRange: number;
 
     static classInfo = makeDerivedClassInfo(LVGLWidget.classInfo, {
         enabledInComponentPalette: (projectType: ProjectType, projectStore) =>
@@ -67,6 +68,11 @@ export class LVGLScaleWidget extends LVGLWidget {
                 type: PropertyType.Boolean,
                 checkboxStyleSwitch: true,
                 propertyGridGroup: specificGroup
+            },
+            {
+                name: "angleRange",
+                type: PropertyType.Number,
+                propertyGridGroup: specificGroup
             }
         ],
 
@@ -95,7 +101,8 @@ export class LVGLScaleWidget extends LVGLWidget {
             majorRange: 40,
             totalTickCount: 31,
             majorTickEvery: 5,
-            showLabels: true
+            showLabels: true,
+            angleRange: 270
         },
 
         icon: (
@@ -136,7 +143,8 @@ export class LVGLScaleWidget extends LVGLWidget {
             majorRange: observable,
             totalTickCount: observable,
             majorTickEvery: observable,
-            showLabels: observable
+            showLabels: observable,
+            angleRange: observable
         });
     }
 
@@ -178,6 +186,12 @@ export class LVGLScaleWidget extends LVGLWidget {
         code.callObjectFunction(
             "lv_scale_set_label_show",
             code.constant(this.showLabels ? "true" : "false")
+        );
+
+        // angleRange
+        code.callObjectFunction(
+            "lv_scale_set_angle_range",
+            this.angleRange
         );
     }
 }
