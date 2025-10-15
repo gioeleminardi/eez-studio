@@ -2384,7 +2384,7 @@ extern const ext_img_desc_t images[${this.bitmaps.length || 1}];
         build.line(
             `loadScreen(SCREEN_ID_${this.getScreenIdentifier(
                 this.pages[0]
-            ).toUpperCase()});`
+            ).toUpperCase()}, LV_SCR_LOAD_ANIM_FADE_IN);`
         );
         build.unindent();
 
